@@ -83,7 +83,7 @@ def logout():
 
 if __name__ == '__main__':
     print("\n" + "="*50)
-    print("Aurora Secure Started!")
+    print("Crypt's Secure Started !")
     print("URL: http://127.0.0.1:5000")
     print("="*50 + "\n")
     app.run(debug=True, host='127.0.0.1', port=5000)
