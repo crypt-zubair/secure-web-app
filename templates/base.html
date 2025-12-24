@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Secure Web App{% endblock %}</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 30%, #24243e 60%, #1a472a 85%, #0d5f3f 100%);
+            background-attachment: fixed;
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(100, 200, 255, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(138, 43, 226, 0.2) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 0%, rgba(0, 255, 200, 0.2) 0%, transparent 50%);
+            pointer-events: none;
+            animation: aurora 20s ease-in-out infinite;
+            z-index: 0;
+        }
+        
+        @keyframes aurora {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30%;
+            background: linear-gradient(to top, rgba(10, 40, 30, 0.8) 0%, rgba(20, 60, 50, 0.4) 100%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        nav { 
+            background-color: rgba(0, 0, 0, 0.5); 
+            backdrop-filter: blur(10px);
+            color: white; 
+            padding: 15px 30px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            position: relative;
+            z-index: 10;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        nav .brand { font-size: 20px; font-weight: bold; letter-spacing: 2px; }
+        nav a { color: white; text-decoration: none; margin-left: 20px; transition: color 0.3s; }
+        nav a:hover { color: #64c8ff; }
+        
+        .container { 
+            flex: 1; 
+            max-width: 500px; 
+            width: 90%; 
+            margin: 50px auto; 
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 40px; 
+            border-radius: 20px; 
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 5;
+        }
+        
+        h1 { color: #333; margin-bottom: 10px; font-size: 28px; }
+        .subtitle { color: #666; margin-bottom: 30px; font-size: 14px; }
+        
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; color: #333; font-size: 14px; }
+        
+        input { 
+            width: 100%; 
+            padding: 12px; 
+            border: 2px solid #ddd; 
+            border-radius: 10px; 
+            font-size: 14px; 
+            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        input:focus { 
+            outline: none; 
+            border-color: #64c8ff; 
+            box-shadow: 0 0 10px rgba(100, 200, 255, 0.3);
+            background: white;
+        }
+        
+        button { 
+            width: 100%; 
+            padding: 12px; 
+            background: linear-gradient(135deg, #64c8ff 0%, #8a2be2 100%); 
+            color: white; 
+            border: none; 
+            border-radius: 10px; 
+            font-size: 16px; 
+            font-weight: 600; 
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        button:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 10px 30px rgba(100, 200, 255, 0.4); 
+        }
+        
+        button:active { transform: translateY(0); }
+        
+        .alert { 
+            padding: 15px; 
+            margin-bottom: 20px; 
+            border-radius: 10px; 
+            font-size: 14px; 
+            border-left: 4px solid; 
+        }
+        
+        .alert-success { background-color: #d4edda; color: #155724; border-color: #28a745; }
+        .alert-danger { background-color: #f8d7da; color: #721c24; border-color: #dc3545; }
+        .alert-info { background-color: #d1ecf1; color: #0c5460; border-color: #17a2b8; }
+        
+        .info-section { 
+            margin-top: 30px; 
+            padding-top: 20px; 
+            border-top: 2px solid #eee; 
+            font-size: 14px; 
+            color: #666; 
+        }
+        
+        .info-section a { color: #64c8ff; text-decoration: none; font-weight: 600; }
+        .info-section a:hover { text-decoration: underline; }
+        
+        footer { 
+            text-align: center; 
+            padding: 20px; 
+            color: rgba(255, 255, 255, 0.7); 
+            font-size: 12px;
+            position: relative;
+            z-index: 5;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="brand">❄️ Aurora Secure</div>
+        <div>
+            {% if current_user.is_authenticated %}
+                <span>Hi, <strong>{{ current_user.username }}</strong>!</span>
+                <a href="{{ url_for('logout') }}">Logout</a>
+            {% else %}
+                <a href="{{ url_for('login') }}">Login</a>
+                <a href="{{ url_for('signup') }}">Sign Up</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Aurora Secure | Protected by Advanced Encryption</p>
+    </footer>
+</body>
+</html>

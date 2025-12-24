@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard - Premium Secure App{% endblock %}
+{% block content %}
+<div style="text-align: center; margin-bottom: 40px;">
+    <h1 style="font-size: 36px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px;">Welcome, {{ user.username }}! 🎉</h1>
+    <p style="font-size: 16px; color: #666;">Your secure account is now active and protected</p>
+</div>
+
+<!-- Premium Account Card -->
+<div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 15px; margin-bottom: 30px; box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 20px;">
+        <div>
+            <p style="font-size: 14px; opacity: 0.9; margin-bottom: 5px;">ACCOUNT USERNAME</p>
+            <h2 style="font-size: 24px; margin: 0;">{{ user.username }}</h2>
+        </div>
+        <div>
+            <p style="font-size: 14px; opacity: 0.9; margin-bottom: 5px;">REGISTERED EMAIL</p>
+            <h2 style="font-size: 18px; margin: 0; word-break: break-all;">{{ user.email }}</h2>
+        </div>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+        <div>
+            <p style="font-size: 14px; opacity: 0.9; margin-bottom: 5px;">MEMBER SINCE</p>
+            <p style="font-size: 16px; margin: 0; font-weight: 600;">{{ user.created_at.strftime('%B %d, %Y') }}</p>
+        </div>
+        <div>
+            <p style="font-size: 14px; opacity: 0.9; margin-bottom: 5px;">LAST LOGIN</p>
+            <p style="font-size: 16px; margin: 0; font-weight: 600;">{% if user.last_login %}{{ user.last_login.strftime('%B %d, %Y') }}{% else %}First Login{% endif %}</p>
+        </div>
+    </div>
+</div>
+
+<!-- Security Features Section -->
+<div style="margin-bottom: 30px;">
+    <h2 style="color: #333; margin-bottom: 20px; font-size: 22px;">🔐 Enterprise Security Features</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+        <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 20px; border-radius: 12px; color: white;">
+            <p style="font-weight: 600; margin: 0; font-size: 14px;">🔒 Password Encryption</p>
+            <p style="font-size: 12px; opacity: 0.9; margin: 5px 0 0 0;">PBKDF2-SHA256 with 16-byte salt</p>
+        </div>
+        <div style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); padding: 20px; border-radius: 12px; color: white;">
+            <p style="font-weight: 600; margin: 0; font-size: 14px;">🛡️ CSRF Protection</p>
+            <p style="font-size: 12px; opacity: 0.9; margin: 5px 0 0 0;">Flask-WTF Token Validation</p>
+        </div>
+        <div style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); padding: 20px; border-radius: 12px; color: white;">
+            <p style="font-weight: 600; margin: 0; font-size: 14px;">🚫 XSS Prevention</p>
+            <p style="font-size: 12px; opacity: 0.9; margin: 5px 0 0 0;">Jinja2 Auto HTML Escaping</p>
+        </div>
+        <div style="background: linear-gradient(135deg, #ff9a56 0%, #ff6a88 100%); padding: 20px; border-radius: 12px; color: white;">
+            <p style="font-weight: 600; margin: 0; font-size: 14px;">🗄️ SQL Injection Safe</p>
+            <p style="font-size: 12px; opacity: 0.9; margin: 5px 0 0 0;">SQLAlchemy ORM Parameterized</p>
+        </div>
+    </div>
+</div>
+
+<!-- Trusted By Section (Brand Showcase) -->
+<div style="margin-bottom: 30px;">
+    <h2 style="color: #333; margin-bottom: 20px; font-size: 22px;">🤝 Enterprise Grade Security Like:</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px;">
+        <div style="background: white; border: 2px solid #f0f0f0; padding: 20px; border-radius: 12px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+            <p style="font-size: 28px; margin: 0;">🍎</p>
+            <p style="font-weight: 600; margin: 10px 0 0 0; color: #333;">Apple Security</p>
+            <p style="font-size: 12px; color: #666; margin: 5px 0 0 0;">End-to-end encryption standards</p>
+        </div>
+        <div style="background: white; border: 2px solid #f0f0f0; padding: 20px; border-radius: 12px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+            <p style="font-size: 28px; margin: 0;">Ⓜ️</p>
+            <p style="font-weight: 600; margin: 10px 0 0 0; color: #333;">Microsoft Security</p>
+            <p style="font-size: 12px; color: #666; margin: 5px 0 0 0;">Multi-factor authentication ready</p>
+        </div>
+        <div style="background: white; border: 2px solid #f0f0f0; padding: 20px; border-radius: 12px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+            <p style="font-size: 28px; margin: 0;">✓</p>
+            <p style="font-weight: 600; margin: 10px 0 0 0; color: #333;">Enterprise Standard</p>
+            <p style="font-size: 12px; color: #666; margin: 5px 0 0 0;">ISO 27001 compliance ready</p>
+        </div>
+    </div>
+</div>
+
+<!-- Account Activity Stats (Unique Feature) -->
+<div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 25px; border-radius: 15px; margin-bottom: 30px; color: white;">
+    <h3 style="margin: 0 0 20px 0; font-size: 18px;">📊 Your Account Stats</h3>
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px;">
+        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; text-align: center;">
+            <p style="font-size: 24px; margin: 0; font-weight: 600;">✓ ACTIVE</p>
+            <p style="font-size: 12px; margin: 5px 0 0 0; opacity: 0.9;">Account Status</p>
+        </div>
+        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; text-align: center;">
+            <p style="font-size: 24px; margin: 0; font-weight: 600;">🔒 SECURE</p>
+            <p style="font-size: 12px; margin: 5px 0 0 0; opacity: 0.9;">Encryption Level</p>
+        </div>
+        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; text-align: center;">
+            <p style="font-size: 24px; margin: 0; font-weight: 600;">⚡ FAST</p>
+            <p style="font-size: 12px; margin: 5px 0 0 0; opacity: 0.9;">Performance</p>
+        </div>
+    </div>
+</div>
+
+<!-- Developer Features -->
+<div style="background: #f8f9fa; padding: 25px; border-radius: 15px; border-left: 4px solid #667eea; margin-bottom: 30px;">
+    <h3 style="color: #667eea; margin: 0 0 15px 0; font-size: 18px;">👨‍💻 Built With Modern Tech Stack</h3>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; font-size: 14px; color: #333;">
+        <div>
+            <p style="margin: 0; font-weight: 600;">✓ Flask Framework</p>
+            <p style="margin: 0; font-weight: 600;">✓ SQLAlchemy ORM</p>
+            <p style="margin: 0; font-weight: 600;">✓ WTForms Validation</p>
+        </div>
+        <div>
+            <p style="margin: 0; font-weight: 600;">✓ Flask-Login Sessions</p>
+            <p style="margin: 0; font-weight: 600;">✓ Werkzeug Security</p>
+            <p style="margin: 0; font-weight: 600;">✓ SQLite Database</p>
+        </div>
+    </div>
+</div>
+
+<!-- CTA Section -->
+<div style="text-align: center; padding: 30px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; color: white; margin-bottom: 30px;">
+    <h2 style="margin: 0 0 10px 0;">Your Data is Protected</h2>
+    <p style="margin: 0 0 20px 0; font-size: 14px; opacity: 0.9;">Enterprise-grade security with zero compromises</p>
+    <a href="{{ url_for('logout') }}" style="display: inline-block; background: rgba(255,255,255,0.2); color: white; padding: 12px 30px; text-decoration: none; border-radius: 8px; font-weight: 600; border: 2px solid white; transition: all 0.3s;">
+        Logout Securely
+    </a>
+</div>
+
+<!-- Footer Info -->
+<div style="text-align: center; padding: 20px; color: #666; font-size: 12px; border-top: 2px solid #eee;">
+    <p style="margin: 0;">🔐 This application implements industry-standard security practices</p>
+    <p style="margin: 5px 0 0 0;">Last updated: 2025 | Secure Web Application v1.0</p>
+</div>
+{% endblock %}
