@@ -69,19 +69,20 @@
         nav a:hover { color: #64c8ff; }
         
         .container { 
-            flex: 1; 
-            max-width: 500px; 
-            width: 90%; 
-            margin: 50px auto; 
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 40px; 
-            border-radius: 20px; 
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            position: relative;
-            z-index: 5;
-        }
+    flex: 1; 
+    max-width: 900px;      /* wider white box */
+    width: 95%;            /* fill more of screen on small devices */
+    margin: 50px auto; 
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 40px; 
+    border-radius: 20px; 
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    z-index: 5;
+}
+
         
         h1 { color: #333; margin-bottom: 10px; font-size: 28px; }
         .subtitle { color: #666; margin-bottom: 30px; font-size: 14px; }
@@ -161,7 +162,8 @@
 </head>
 <body>
     <nav>
-        <div class="brand">❄️ Aurora Secure</div>
+        <div class="brand">👾 Crypt<span style="letter-spacing:0.12em;">’s Secure</span>
+</div>
         <div>
             {% if current_user.is_authenticated %}
                 <span>Hi, <strong>{{ current_user.username }}</strong>!</span>
@@ -185,7 +187,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2025 Aurora Secure | Protected by Advanced Encryption</p>
+        <p>&copy; 2025 Crypt's Secure | Protected by Advanced Encryption | Zubair ahmed</p>
     </footer>
 </body>
 </html>
